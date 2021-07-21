@@ -1,13 +1,7 @@
-/project/target/
-/target/
-/.idea
+**/target
+**/.idea
 *.class
-/.idea/
-.idea
 .DS_Store
 /modules/**/target/
-logs
+**/logs
 /logs/*
-*.log
-target
-
