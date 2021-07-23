@@ -86,13 +86,23 @@ object OptMonoidExc {
   }
 }
 
+/**
+ * compose: makes a new function that composes other functions f(g(x))
+ */
+def f(s: String) = "f(" + s + ")"
+def g(s: String) = "g(" + s + ")"
+val fComposeG = f _ compose g _
+fComposeG("yay")
+
+/**
+ * andThen is like compose, but calls the first function and then the second, g(f(x))
+ */
+
 /** Exc 10.3 */
-//TODO Test the content
 def endoMonoid[A] = new Monoid[A => A] {
-  def op(a1: (A) => A, a2: (A) => A): (A) => A = a1 compose a2
+  def op(a1: (A) => A, a2: (A) => A): (A) => A = a1 compose a2 // a1(a2(x))
   def unit = (a: A) => a
 }
-
 
 def dual[A](m: Monoid[A]) = new Monoid[A] {
   def op(a1:A, a2: A): A = m.op(a1, a2)
@@ -110,15 +120,26 @@ val twice: Int => Int = x => x + x
 val square: Int => Int = x => x * x
 
 /** Identity function*/
-unit(3)
-//monoid laws
+/**
+ * identity element(a kind of element  which leaves any element
+ * of the set unchanged when combined with it )
+ */
+
+unit(20) == 20
+
+/** monoid law: Binary associative operation */
 op(inc,op(twice,square))(3) == op(op(inc,twice),square)(3)
 op(inc,unit)(3) == inc(3)
 op(unit, inc)(3) == inc(3)
 
-/** the monoid's op comopose functions */
+/** the monoid's op compose functions */
+/**
+ * compose: makes a new function that composes other functions f(g(x))
+ */
 op(inc, twice)(3) == inc(twice(3))
-op(inc, twice)(3) == 7
 
+val incComposeTwice = inc compose twice
+incComposeTwice(3) == inc(twice(3))
 op(unit,op(inc, twice))(3) == 7
 op(twice,op(inc, unit))(3) == 8
+
