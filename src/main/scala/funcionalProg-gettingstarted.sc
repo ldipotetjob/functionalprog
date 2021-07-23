@@ -52,7 +52,6 @@ lessThanWithApply.apply(10,6)
  * ref: https://dzone.com/articles/type-specialization-in-scala
  *
  * */
-
 def binarySearch[@specialized A](as: Array[A], key: A, gt: (A,A) => Boolean): Int = {
   as.filter(gt(_,key)).size
 }
