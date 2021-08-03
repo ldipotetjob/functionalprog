@@ -243,7 +243,7 @@ val wcMonoid: Monoid[WC] = new Monoid[WC]{
   }
 }
 
-/** counting how many words in a string*/
+/** counting how many words in a string */
 def count(s: String): Int = {
   def wc(c: Char): WC = if (c.isWhitespace) Part("", 0, "")
   else Stub(c.toString)
@@ -252,6 +252,8 @@ def count(s: String): Int = {
     case Stub(s) => unstub(s)
     case Part(l, w, r) => unstub(l) + w + unstub(r) }
 }
+
+// TODO -> parsing/processing file in parallel form
 
 /** Testing our solution*/
 count("we are making test for count words in a string")
