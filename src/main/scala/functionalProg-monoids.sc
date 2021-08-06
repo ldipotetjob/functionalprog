@@ -37,6 +37,12 @@ object FromMonoid{
 
 }
 
+val optionMonoid = new Monoid[Option[String]] {
+  def op(a1: Option[String], a2: Option[String]) = Option(a1.getOrElse("") + a2.getOrElse(""))
+  def unit = None
+}
+
+
 import FromMonoid.{monoidOp, _}
 
 println(monoidOp(List("a", "b", "c")))
